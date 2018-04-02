@@ -86,6 +86,7 @@ public class GameScreen implements Screen {
     public void dispose() {
         grassTexture.dispose();
         wolfMailTexture.dispose();
+        wolfFemaleTexture.dispose();
         batch.dispose();
     }
 }
