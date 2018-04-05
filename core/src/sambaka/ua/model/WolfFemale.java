@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sambaka.ua.control.WolfFemaleController;
 
-public class WolfFemale extends GameObject{
+public class WolfFemale extends Wolf{
     private WolfFemaleController wolfFemaleController;
     public WolfFemale(Texture texture, float x, float y, float width, float height) {
         super(texture, x, y, width, height);
@@ -13,6 +13,7 @@ public class WolfFemale extends GameObject{
 
     public void draw(SpriteBatch batch) {
         super.draw(batch);
+        wolfFemaleController.checkedIsMale();
         wolfFemaleController.move();
     }
 }

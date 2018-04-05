@@ -11,34 +11,47 @@ import sambaka.ua.model.Grass;
 import sambaka.ua.model.WolfFemale;
 import sambaka.ua.model.WolfMale;
 
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class GameScreen implements Screen {
     public static float DELTACFF;
 
     private Texture grassTexture;
-    private Texture wolfMailTexture;
+    private Texture wolfMaleTexture;
     private Texture wolfFemaleTexture;
     private SpriteBatch batch;
     private Grass grass;
     private OrthographicCamera camera;
-    private WolfMale[] wolfMale;
-    private WolfFemale wolfFemale;
+    public static CopyOnWriteArrayList<WolfMale> wolfMale;
+    public static CopyOnWriteArrayList<WolfFemale> wolfFemale;
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        grassTexture = new Texture(Gdx.files.internal("grass.jpg"));
-        grass = new Grass(grassTexture, 0, 0, grassTexture.getWidth(), grassTexture.getHeight());
-        initialsWolfsMail();
-
-        wolfFemaleTexture = new Texture(Gdx.files.internal("wolfFemail.png"));
-        wolfFemale = new WolfFemale(wolfFemaleTexture, 100, 100, wolfFemaleTexture.getWidth(), wolfFemaleTexture.getHeight());
+        initialGrass();
+        initialsWolfsMale();
+        initialsWolfsFemale();
     }
 
-    private void initialsWolfsMail() {
-        wolfMailTexture = new Texture(Gdx.files.internal("wolf.png"));
-        wolfMale = new WolfMale[10];
-        for (int i = 0; i < wolfMale.length; i++) {
-            wolfMale[i] = new WolfMale(wolfMailTexture, 0, 0, wolfMailTexture.getWidth(), wolfMailTexture.getHeight());
+    private void initialGrass() {
+        grassTexture = new Texture(Gdx.files.internal("grass.jpg"));
+        grass = new Grass(grassTexture, 0, 0, grassTexture.getWidth(), grassTexture.getHeight());
+    }
+
+    private void initialsWolfsMale() {
+        wolfMaleTexture = new Texture(Gdx.files.internal("wolf.png"));
+        wolfMale = new CopyOnWriteArrayList<WolfMale>();
+        for (int i = 0; i < 1; i++) {
+            wolfMale.add(new WolfMale(wolfMaleTexture, 0, 0, wolfMaleTexture.getWidth(), wolfMaleTexture.getHeight()));
+        }
+    }
+
+    private void initialsWolfsFemale() {
+        wolfFemaleTexture = new Texture(Gdx.files.internal("wolfFemale.png"));
+        wolfFemale=new CopyOnWriteArrayList<WolfFemale>();
+        for (int i = 0; i < 1; i++) {
+            wolfFemale.add(new WolfFemale(wolfFemaleTexture, 90, 90, wolfFemaleTexture.getWidth(), wolfFemaleTexture.getHeight()));
         }
     }
 
@@ -50,12 +63,14 @@ public class GameScreen implements Screen {
         // batch.setProjectionMatrix(camera.combined);
         batch.begin();
         grass.draw(batch);
-        for (WolfMale w:wolfMale
-             ){
+        for (WolfMale w : wolfMale
+                ) {
             w.draw(batch);
         }
-
-        wolfFemale.draw(batch);
+        for (WolfFemale w:wolfFemale
+             ) {
+            w.draw(batch);
+        }
         batch.end();
     }
 
@@ -82,10 +97,11 @@ public class GameScreen implements Screen {
 
     }
 
+
     @Override
     public void dispose() {
         grassTexture.dispose();
-        wolfMailTexture.dispose();
+        wolfMaleTexture.dispose();
         wolfFemaleTexture.dispose();
         batch.dispose();
     }

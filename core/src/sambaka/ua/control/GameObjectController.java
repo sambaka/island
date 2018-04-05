@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Polygon;
 import java.util.Random;
 
 public class GameObjectController {
-     Polygon bounds;
+    Polygon bounds;
     private Random r = new Random();
     private float posX;
     private float posY;
@@ -21,7 +21,7 @@ public class GameObjectController {
         return r.nextInt(max - min + 1) + min;
     }
 
-    ///дописать рандомное перемещение по клеткам
+    //рандомное перемещение по клеткам
     public void move() {
         if (posX <= 0) {
             posX += 30f * generateDxDy(0, 1);
