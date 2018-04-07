@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Polygon;
 import java.util.Random;
 
 public class GameObjectController {
-    Polygon bounds;
+    protected Polygon bounds;
     private Random r = new Random();
     private float posX;
     private float posY;
@@ -17,6 +17,7 @@ public class GameObjectController {
         this.posY = bounds.getY();
     }
 
+    //гененрируем направление движения -1, 0, 1
     private int generateDxDy(int min, int max) {
         return r.nextInt(max - min + 1) + min;
     }
@@ -39,6 +40,7 @@ public class GameObjectController {
         }
         bounds.setPosition(posX, posY);
     }
+
 
     public void handle() {
         // wolfBounds.setPosition(wolfBounds.getX(), wolfBounds.getY() + 0.2f * GameScreen.DELTACFF);

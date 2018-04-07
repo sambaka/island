@@ -2,18 +2,16 @@ package sambaka.ua.control;
 
 import com.badlogic.gdx.math.Polygon;
 
-public class WolfController extends GameObjectController {
+public abstract class WolfController extends GameObjectController {
     public WolfController(Polygon bounds) {
         super(bounds);
     }
 
-    protected void eat(){
+    protected abstract void eat();
 
-    }
-    protected void look(){
+    protected abstract void look();
 
-    }
-    protected void hunt(){
+    public abstract void hunt();
 
-    }
+    protected abstract void changeHealth();
 }
